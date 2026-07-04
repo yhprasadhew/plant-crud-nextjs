@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { HexclaveProvider, HexclaveTheme } from "@hexclave/next";
-import { hexclaveClientApp } from "../stack/client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
@@ -32,18 +30,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex flex-col"><HexclaveProvider app={hexclaveClientApp}><HexclaveTheme>
-          <ThemeProvider>
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
+      <body className="min-h-screen flex flex-col">
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-1">
+            {children}
+          </main>
 
-        <h1 className="bg-white text-black dark:bg-slate-950 dark:text-white p-4">Footer </h1>
+          <h1 className="bg-white text-black dark:bg-slate-950 dark:text-white p-4">Footer </h1>
         </ThemeProvider>
-      </HexclaveTheme></HexclaveProvider></body>
+      </body>
     </html>
   );
 }

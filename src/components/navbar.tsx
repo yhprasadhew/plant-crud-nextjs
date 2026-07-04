@@ -1,9 +1,33 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Home, Leaf } from "lucide-react";
+import { Home, Leaf, LogOut } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      const response = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        router.push("/sign-in");
+        router.refresh();
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+      setIsLoggingOut(false);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-white text-black dark:bg-slate-950 dark:text-white shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -39,8 +63,14 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <ModeToggle />
 
-          <Button asChild variant="secondary">
-            <Link href="/sign-in">Sign In</Link>
+          <Button
+            onClick={handleLogout}
+            disabled={isLoggingOut}
+            variant="destructive"
+            size="sm"
+          >
+            <LogOut className="h-4 w-4 mr-2" />
+            {isLoggingOut ? "Logging out..." : "Logout"}
           </Button>
         </div>
 

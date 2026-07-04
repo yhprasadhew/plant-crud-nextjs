@@ -13,6 +13,8 @@ export function ThemeProvider({
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
+      storageKey="theme"
+      enableColorScheme={false}
       {...props}
     >
       {children}

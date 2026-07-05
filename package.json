@@ -11,6 +11,7 @@
     "@base-ui/react": "^1.6.0",
     "@hexclave/next": "^1.0.45",
     "@neondatabase/auth": "^0.4.2-beta",
+    "@neondatabase/serverless": "^1.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.23.0",

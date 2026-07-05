@@ -27,3 +27,12 @@ export async function getUserSession(request?: Request) {
     return null;
   }
 }
+
+export function isAdmin(user: any) {
+  if (!user) return false;
+  if (user.role === "admin") return true;
+  const adminEmails = (process.env.ADMIN_EMAILS || "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase());
+  return adminEmails.includes(user.email.toLowerCase());
+}

@@ -144,6 +144,7 @@ export default function PlantsPage() {
       setIsSubmitting(false);
     }
   };
+  
 
   const handleDeletePlant = async (id: number) => {
     if (!confirm("Are you sure you want to delete this plant?")) return;
